@@ -141,7 +141,7 @@ func (this *service) ShouldRateLimit(
 			return
 		}
 
-		logger.Debugf("caught error during call")
+		logger.Debugf("caught error during call: %v", err)
 		finalResponse = nil
 		switch t := err.(type) {
 		case redis.RedisError:
