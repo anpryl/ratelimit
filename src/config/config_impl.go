@@ -6,7 +6,7 @@ import (
 
 	pb_struct "github.com/envoyproxy/go-control-plane/envoy/api/v2/ratelimit"
 	pb "github.com/envoyproxy/go-control-plane/envoy/service/ratelimit/v2"
-	"github.com/lyft/gostats"
+	stats "github.com/lyft/gostats"
 	logger "github.com/sirupsen/logrus"
 	"golang.org/x/net/context"
 	"gopkg.in/yaml.v2"
@@ -187,7 +187,7 @@ func validateYamlKeys(config RateLimitConfigToLoad, config_map map[interface{}]i
 		// the yaml's keys we don't panic here.
 		case nil:
 		default:
-			errorText := fmt.Sprintf("error checking config")
+			errorText := fmt.Sprintf("error checking config: unexpected type %T of value %v", v, v)
 			logger.Debugf(errorText)
 			panic(newRateLimitConfigError(config, errorText))
 		}
